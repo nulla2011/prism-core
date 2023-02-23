@@ -27,7 +27,7 @@ export default class Asset {
     this.data = this.ext === 'm4a' ? Buffer.alloc(0) : '';
   }
   async fetchFile() {
-    console.log('downloading..');
+    console.log(`downloading ${this.name}`);
     this.buffer = Buffer.from(await fetchFile(this.url));
   }
   async decodeFile() {

@@ -13,17 +13,18 @@ export default async function getAssetsMap() {
   );
   await assetMap.fetchFile();
   await assetMap.decodeFile();
-  let json = JSON.parse(assetMap.data as string);
-  let version = json.version;
+  let map = JSON.parse(assetMap.data as string);
+  let version = map.version;
   writeFile(
     path.resolve(`${SAVE_PATH}/asset_map_v${version}.json`),
-    JSON.stringify(json, null, 2),
+    JSON.stringify(map, null, 2),
     { flag: 'wx' },
     (e: any) => {
       console.error(`error: ${e.code}`);
       console.log(`write "asset_map_v${version}.json" finished`);
     }
   );
+  return { map, version };
 }
 
 if (require.main === module) {
