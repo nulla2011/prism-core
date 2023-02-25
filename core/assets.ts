@@ -9,32 +9,31 @@ export enum fileType {
   m4a,
   mp4,
   png,
+  jpg,
   webp,
   atlas,
 }
 
 export default class Asset {
-  public buffer: Buffer;
   public data: Buffer | string;
   public isEncrypted;
-  private ext: string;
+  public ext: string;
   private url: URL;
   constructor(public name: string) {
     this.ext = name.split('.').length === 1 ? '' : name.split('.').pop()!;
     this.isEncrypted = this.ext === 'json' || this.ext === 'atlas' ? true : false;
-    this.buffer = Buffer.alloc(0);
     this.url = new URL(URL_PREFIX + hashFileName(name));
-    this.data = this.ext === 'm4a' ? Buffer.alloc(0) : '';
+    this.data = Buffer.alloc(0);
   }
   async fetchFile() {
     console.log(`downloading ${this.name}`);
-    this.buffer = Buffer.from(await fetchFile(this.url));
+    this.data = Buffer.from(await fetchFile(this.url));
   }
   async decodeFile() {
     if (this.isEncrypted) {
-      this.buffer = decryptFile(this.buffer);
+      this.data = decryptFile(this.data as Buffer);
     }
-    let data = await unGzip(this.buffer);
+    let data = await unGzip(this.data as Buffer);
     this.data = this.ext === 'json' || this.ext === 'atlas' ? data.toString() : data;
   }
   fixUrl(url: URL) {

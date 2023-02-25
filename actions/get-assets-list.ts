@@ -31,7 +31,7 @@ export default async function getAssetsList() {
     { flag: 'wx' },
     (err: any) => {
       if (err) console.log(`error: ${err.code}`);
-      console.log(`write "asset_list_v${version}.json "finished`);
+      console.log(`write "asset_list_v${version}.json" finished`);
     }
   );
 }

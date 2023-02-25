@@ -13,3 +13,7 @@ export const formatTime = (date: Date) => {
     .toString()
     .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
 };
+
+export const replaceSlash = (input: string) => {
+  return input.replaceAll('/', '-');
+};
