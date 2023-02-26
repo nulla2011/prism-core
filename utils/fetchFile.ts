@@ -1,5 +1,5 @@
 import Axios, { AxiosResponse } from 'axios';
-// import { writeFileSync } from 'fs';
+import is404 from './404';
 
 export default async function fetchFile(URL: URL) {
   let response: AxiosResponse;
@@ -7,12 +7,16 @@ export default async function fetchFile(URL: URL) {
     responseType: 'arraybuffer',
     responseEncoding: 'binary',
   }).catch((error) => {
-    console.log(error);
+    console.log(`${error}`);
     process.exit(1);
   });
   if (response.status >= 300) {
     throw new Error('response ' + response.status);
   }
-  // writeFileSync('t', response.data);
+  if (is404(response.data)) {
+    //判断 head？
+    console.log('resource error!');
+    process.exit(1);
+  }
   return response.data;
 }

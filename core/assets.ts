@@ -16,7 +16,7 @@ export enum fileType {
 
 export default class Asset {
   public data: Buffer | string;
-  public isEncrypted;
+  public isEncrypted: boolean;
   public ext: string;
   private url: URL;
   constructor(public name: string) {
