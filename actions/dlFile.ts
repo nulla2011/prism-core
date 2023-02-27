@@ -7,7 +7,7 @@ import { replaceSlash } from '../utils';
 export default async function dlFile(name: string) {
   let asset = new Asset(name);
   await asset.fetchFile();
-  if (asset.ext !== 'png' && asset.ext !== 'jpg') {
+  if (asset.ext !== 'png' && asset.ext !== 'jpg' && asset.ext !== 'm4a' && asset.ext !== 'mp4') {
     await asset.decodeFile();
   }
   writeFile(path.resolve(SAVE_PATH, replaceSlash(name)), asset.data, (err: any) => {

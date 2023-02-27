@@ -8,9 +8,7 @@ const ASSET_MAP = 'asset-map.json';
 
 export default async function getAssetsMap() {
   let assetMap = new Asset(ASSET_MAP);
-  assetMap.fixUrl(
-    new URL(URL_PREFIX + ASSET_MAP.replace('.json', '') + '-' + hashFileName(ASSET_MAP))
-  );
+  assetMap.fixUrl(URL_PREFIX + ASSET_MAP.replace('.json', '') + '-' + hashFileName(ASSET_MAP));
   await assetMap.fetchFile();
   await assetMap.decodeFile();
   let map = JSON.parse(assetMap.data as string);

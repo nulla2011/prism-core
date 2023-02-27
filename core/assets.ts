@@ -2,7 +2,6 @@ import fetchFile from '../utils/fetchFile';
 import decryptFile from './decryptFile';
 import hashFileName from './hashFileName';
 import unGzip from '../lib/gzip';
-import { URL_PREFIX } from '../settings';
 
 export enum fileType {
   json,
@@ -18,11 +17,12 @@ export default class Asset {
   public data: Buffer | string;
   public isEncrypted: boolean;
   public ext: string;
-  private url: URL;
+  private url: string;
   constructor(public name: string) {
     this.ext = name.split('.').length === 1 ? '' : name.split('.').pop()!;
-    this.isEncrypted = this.ext === 'json' || this.ext === 'atlas' ? true : false;
-    this.url = new URL(URL_PREFIX + hashFileName(name));
+    this.isEncrypted = this.ext === 'json' || this.ext === 'atlas';
+    this.url =
+      hashFileName(name) + (this.ext === 'mp4' || this.ext === 'm4a' ? '.' + this.ext : '');
     this.data = Buffer.alloc(0);
   }
   async fetchFile() {
@@ -36,7 +36,7 @@ export default class Asset {
     let data = await unGzip(this.data as Buffer);
     this.data = this.ext === 'json' || this.ext === 'atlas' ? data.toString() : data;
   }
-  fixUrl(url: URL) {
+  fixUrl(url: string) {
     //应对特殊情况
     this.url = url;
   }
