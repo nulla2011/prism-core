@@ -3,7 +3,7 @@ import decryptFile from './decryptFile';
 import hashFileName from './hashFileName';
 import unGzip from '../lib/gzip';
 
-export enum fileType {
+enum fileType {
   json,
   m4a,
   mp4,
