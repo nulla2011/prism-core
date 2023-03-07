@@ -17,7 +17,7 @@ export default class Asset {
   public data: Buffer | string;
   public isEncrypted: boolean;
   public ext: string;
-  private url: string;
+  public url: string;
   constructor(public name: string) {
     this.ext = name.split('.').length === 1 ? '' : name.split('.').pop()!;
     this.isEncrypted = this.ext === 'json' || this.ext === 'atlas';

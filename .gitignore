@@ -2,3 +2,4 @@ node_modules
 *.js
 .VSCodeCounter
 description.md
+!template/app.js
