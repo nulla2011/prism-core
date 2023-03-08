@@ -17,7 +17,7 @@ button.addEventListener('click', async (e) => {
     alert('format not support!');
     return;
   }
-  let src = await fetch('http://localhost:4120/post', {
+  let src = await fetch(window.location + 'post', {
     method: 'POST',
     body: input,
   }).then((r) => r.text());

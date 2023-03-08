@@ -1,4 +1,4 @@
-import { readFileSync, appendFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, appendFileSync, mkdirSync } from 'fs';
 import { SAVE_PATH } from '../settings';
 import path from 'path';
 

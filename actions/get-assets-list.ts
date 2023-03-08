@@ -14,6 +14,7 @@ export default async function getAssetsList() {
   let jsonList: Object[] = new Array(names.length).fill({});
   for (let i = 0; i < names.length; i++) {
     let asset = new Asset(names[i]);
+    asset.getUrl();
     tasks.push(
       asset
         .fetchFile()

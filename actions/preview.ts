@@ -17,7 +17,9 @@ app.get('/app.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../template/app.js'));
 });
 app.post('/post', (req, res) => {
+  console.log(req.body);
   let asset = new Asset(req.body);
+  asset.getUrl();
   res.send(URL_PREFIX + asset.url);
 });
 app.listen(port, () =>
