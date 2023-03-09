@@ -7,11 +7,11 @@ export default function findHash(id: string, resourceType: typeof HASHED_PREFIX[
     list = hashList.skins;
     for (const el of list) {
       if (el.skinCharacters[0].id === id) {
-        if (el.kind === 'plain') {
-          return null;
-        } else {
-          return el.skinCharacters[0].hash;
-        }
+        // if (el.kind === 'plain') {
+        //   return null;
+        // } else {
+        return el.skinCharacters[0].hash;
+        // }
       }
     }
     return null;
