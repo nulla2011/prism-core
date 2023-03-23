@@ -17,3 +17,6 @@ export const formatTime = (date: Date) => {
 export const replaceSlash = (input: string) => {
   return input.replaceAll('/', '-');
 };
+export const isSkin = (id: string) => {
+  return /^3000\d{5}0$/.test(id);
+};

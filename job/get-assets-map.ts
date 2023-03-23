@@ -18,7 +18,7 @@ export default async function getAssetsMap() {
     JSON.stringify(map, null, 2),
     { flag: 'wx' },
     (e: any) => {
-      console.error(`error: ${e.code}`);
+      // console.error(`error: ${e}`);
       console.log(`write "asset_map_v${version}.json" finished`);
     }
   );

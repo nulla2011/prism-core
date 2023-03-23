@@ -3,3 +3,4 @@ node_modules
 .VSCodeCounter
 description.md
 !template/app.js
+*.swp

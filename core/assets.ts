@@ -16,10 +16,6 @@ export const HASHED_PREFIX = {
 export type prefixKeys = keyof typeof HASHED_PREFIX;
 type hashResourceTypes = typeof HASHED_PREFIX[prefixKeys];
 
-export const isSkin = (id: string) => {
-  return /^3000\d{5}0$/.test(id);
-};
-
 export enum fileType {
   json,
   m4a,

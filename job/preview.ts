@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 app.get('/app.js', (req, res) => {
   res.append('Content-Type', 'application/javascript');
-  res.sendFile(path.join(__dirname, '../template/app.js'));
+  res.sendFile(path.join(__dirname, '../template/index.js'));
 });
 app.post('/post', (req, res) => {
   console.log(req.body);
