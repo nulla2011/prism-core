@@ -1,14 +1,13 @@
 {
-  "name": "prism",
-  "version": "1.0.0",
+  "name": "prism-core",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -w"
   },
   "keywords": [],
-  "author": "",
+  "author": "nulla",
   "license": "ISC",
   "devDependencies": {
     "@types/body-parser": "^1.19.2",

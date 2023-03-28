@@ -1,8 +1,11 @@
-import hashList from 'C:/Users/n/Documents/sc-assets/_response/hashResources.json';
 import { HASHED_PREFIX, prefixKeys } from '../core/assets';
 import { isSkin } from '.';
 
-export default function findHash(id: string, resourceType: typeof HASHED_PREFIX[prefixKeys]) {
+export default function findHash(
+  id: string,
+  resourceType: typeof HASHED_PREFIX[prefixKeys],
+  hashList: Record<string, any>
+) {
   let list;
   if (isSkin(id)) {
     list = hashList.skins;

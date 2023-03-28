@@ -1,5 +1,5 @@
 import { createGunzip } from 'node:zlib';
-import { Readable, Writable } from 'stream';
+import { Readable } from 'stream';
 
 export default function unGzip(input: Buffer) {
   return new Promise<Buffer>((resolve, reject) => {

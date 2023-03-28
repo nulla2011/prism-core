@@ -2,8 +2,6 @@ import fetchFile from '../utils/fetchFile';
 import decryptFile from './decryptFile';
 import hashFileName from './hashFileName';
 import unGzip from '../lib/gzip';
-import findHash from '../utils/findHash';
-import path from 'node:path';
 
 export const HASHED_PREFIX = {
   'images/content/idols/': 'idols',
@@ -38,14 +36,10 @@ export default class Asset {
     this.hash = null;
     this.url = '';
   }
+  getHash(callback: (arg: string) => string | null) {
+    this.hash = callback(this.name);
+  }
   getUrl() {
-    for (const key in HASHED_PREFIX) {
-      if (this.name.startsWith(key)) {
-        let fileName = path.basename(this.name).replace(path.extname(this.name), '');
-        this.hash = findHash(fileName, HASHED_PREFIX[key as prefixKeys]);
-        break;
-      }
-    }
     this.url =
       hashFileName(this.name, this.hash) +
       (this.ext === fileType.mp4 || this.ext === fileType.m4a ? '.' + fileType[this.ext] : '');
