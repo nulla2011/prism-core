@@ -76,5 +76,4 @@ jobs:
         with:
           artifacts: 'prism-core.zip'
           replacesArtifacts: false
-          token: ${{ secrets.TOKEN }}
           allowUpdates: true
