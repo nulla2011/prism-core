@@ -24,13 +24,11 @@ jobs:
         with:
           version: 7
           run_install: false
-
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
@@ -49,8 +47,10 @@ jobs:
           path: ./package.json
           property: version
       - name: pack
+        # run: |
+        #   zip -r prism-core.zip ./ -x "node_modules/*" "src/*" "file_comment.csv" "tsconfig.json" ".gitignore" ".git/*" ".github/"
         run: |
-          zip -r prism-core.zip ./ -x "node_modules/*" "src/*" "file_comment.csv" "tsconfig.json" ".gitignore" ".git/*"
+          tar -zcvf prism-core.tar.gz ./dist ./template package.json README.md
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
