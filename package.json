@@ -2,7 +2,7 @@
   "name": "prism-core",
   "version": "0.2.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/export.js",
   "scripts": {
     "build": "tsc -w"
   },
@@ -10,9 +10,12 @@
   "author": "nulla",
   "license": "MIT",
   "files": [
-    "dist/",
-    "!dist/job/"
+    "dist/"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nulla2011/prism-core"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
     "@types/express": "^4.17.17",

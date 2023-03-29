@@ -3,5 +3,5 @@ dist
 *.js
 .VSCodeCounter
 description.md
-!template/app.js
+!template/*
 *.swp
