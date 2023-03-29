@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    tags:
-      - '*'
+    branches: ['main']
 
 jobs:
   build:
@@ -52,29 +51,23 @@ jobs:
       - name: pack
         run: |
           zip --junk-paths prism-core.zip ./ -i "dist/*" -i "template/*" -i "package.json" -i "README.md"
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@latest
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: v${{steps.version.outputs.value}}
-      #     release_name: v${{steps.version.outputs.value}}
-      #     draft: false
-      #     prerelease: true
-      # - name: Upload Release Asset
-      #   id: upload-release-asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./prism-core.zip
-      #     asset_name: prism-core.zip
-      #     asset_content_type: application/zip
-      - name: Create Github Release
-        uses: ncipollo/release-action@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts: 'prism-core.zip'
-          replacesArtifacts: false
-          allowUpdates: true
+          tag_name: v${{steps.version.outputs.value}}
+          release_name: v${{steps.version.outputs.value}}
+          draft: false
+          prerelease: true
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./prism-core.zip
+          asset_name: prism-core.zip
+          asset_content_type: application/zip
