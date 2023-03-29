@@ -50,7 +50,7 @@ jobs:
           property: version
       - name: pack
         run: |
-          zip --junk-paths prism-core.zip ./ -i "dist/*" -i "template/*" -i "package.json" -i "README.md"
+          zip --junk-paths prism-core.zip -i "dist/*" -i "template/*" -i "package.json" -i "README.md"
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
