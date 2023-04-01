@@ -1,6 +1,6 @@
 import hashFileName from '../core/hashFileName';
 import Asset from '../core/assets';
-import { writeFile } from 'fs';
+import { writeFile, existsSync } from 'fs';
 import path from 'path';
 import { URL_PREFIX, SAVE_PATH } from '../settings';
 
@@ -13,15 +13,16 @@ export default async function getAssetsMap() {
   await assetMap.decodeFile();
   let map = JSON.parse(assetMap.data as string);
   let version = map.version;
-  writeFile(
-    path.resolve(`${SAVE_PATH}/asset_map_v${version}.json`),
-    JSON.stringify(map, null, 2),
-    { flag: 'wx' },
-    (e: any) => {
-      // console.error(`error: ${e}`);
+  let savePath = path.resolve(`${SAVE_PATH}/asset_map_v${version}.json`);
+  if (!existsSync(savePath)) {
+    writeFile(savePath, JSON.stringify(map, null, 2), { flag: 'wx' }, (err: any) => {
+      if (err) {
+        console.error(`error: ${err}`);
+        process.exit(1);
+      }
       console.log(`write "asset_map_v${version}.json" finished`);
-    }
-  );
+    });
+  }
   return { map, version };
 }
 
