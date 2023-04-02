@@ -11,24 +11,24 @@ let newData: Record<string, number> = JSON.parse(
   readFileSync(path.resolve(SAVE_PATH, `asset_list_v${version}.json`), 'utf-8')
 );
 // if (!existsSync(path.resolve(SAVE_PATH, `v${version}/`))) {
-mkdirSync(path.resolve(SAVE_PATH, `diff_v${version}/`));
+mkdirSync(path.resolve(SAVE_PATH, `diff_v${version}/`), { recursive: true });
 // }
 for (const key in newData) {
   if (!oldData.hasOwnProperty(key)) {
     appendFileSync(
-      path.resolve(SAVE_PATH, `diff_v${version}/`, 'new.txt'),
-      `${key} : ${newData[key]}\n`
+      path.resolve(SAVE_PATH, `diff_v${version}/`, 'new.csv'),
+      `"${key}",${newData[key]}\n`
     );
   } else {
     if (oldData[key] !== newData[key]) {
       appendFileSync(
-        path.resolve(SAVE_PATH, `diff_v${version}/`, 'version-change.txt'),
-        `${key} : ${oldData[key]} -> ${newData[key]}\n`
+        path.resolve(SAVE_PATH, `diff_v${version}/`, 'version-change.csv'),
+        `"${key}",${oldData[key]},${newData[key]}\n`
       );
     }
     delete oldData[key];
   }
 }
 for (const key in oldData) {
-  appendFileSync(path.resolve(SAVE_PATH, `v${version}/`, 'del.txt'), `${key} : ${oldData[key]}`);
+  appendFileSync(path.resolve(SAVE_PATH, `v${version}/`, 'del.csv'), `"${key}",${oldData[key]}`);
 }
