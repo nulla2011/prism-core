@@ -1,5 +1,6 @@
 import Axios, { AxiosResponse } from 'axios';
-import { URL_PREFIX, PRINT_HASH } from '../settings';
+import { PRINT_HASH } from '../settings';
+import { URL_PREFIX } from '../constants/url';
 
 export default async function fetchFile(name: string) {
   if (PRINT_HASH) {

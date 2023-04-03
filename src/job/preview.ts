@@ -1,7 +1,7 @@
 import Express from 'express';
 import bodyParser from 'body-parser';
 import Asset, { HASHED_PREFIX, prefixKeys } from '../core/assets';
-import { URL_PREFIX } from '../settings';
+import { URL_PREFIX } from '../constants/url';
 import path from 'path';
 import { readFileSync } from 'fs';
 import findHash from '../utils/findHash';

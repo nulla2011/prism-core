@@ -2,7 +2,8 @@ import hashFileName from '../core/hashFileName';
 import Asset from '../core/assets';
 import { writeFile, existsSync } from 'fs';
 import path from 'path';
-import { URL_PREFIX, SAVE_PATH } from '../settings';
+import { SAVE_PATH } from '../settings';
+import { URL_PREFIX } from '../constants/url';
 
 const ASSET_MAP = 'asset-map.json';
 
