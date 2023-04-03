@@ -14,14 +14,12 @@ export default async function fetchFile(name: string) {
   service.interceptors.response.use((response) => {
     if (response.headers['content-type']?.includes('text/html')) {
       //404 页面
-      console.log('404 not found!');
-      process.exit(1);
+      throw new Error('404 not found!');
     }
     return response;
   });
   response = await service.get(name).catch((error) => {
-    console.log(`${error}`);
-    process.exit(1);
+    throw new Error(`${error}`);
   });
   if (response.status >= 300) {
     throw new Error('response ' + response.status);
