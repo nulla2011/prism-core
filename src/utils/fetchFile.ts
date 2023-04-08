@@ -9,6 +9,9 @@ export default async function fetchFile(name: string) {
   let response: AxiosResponse;
   let service = Axios.create({
     baseURL: URL_PREFIX,
+    headers: {
+      referer: 'https://shinycolors.enza.fun',
+    },
     responseType: 'arraybuffer',
     responseEncoding: 'binary',
   });
