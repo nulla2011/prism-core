@@ -50,7 +50,7 @@ jobs:
         # run: |
         #   zip -r prism-core.zip ./ -x "node_modules/*" "src/*" "file_comment.csv" "tsconfig.json" ".gitignore" ".git/*" ".github/"
         run: |
-          tar -zcvf prism-core.tar.gz ./dist ./template package.json README.md
+          tar -zcvf prism-core.tar.gz ./dist package.json README.md
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
