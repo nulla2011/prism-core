@@ -12,7 +12,7 @@ export const HASHED_PREFIX = {
   'images/content/comics/': 'comics',
 } as const;
 export type prefixKeys = keyof typeof HASHED_PREFIX;
-type hashResourceTypes = typeof HASHED_PREFIX[prefixKeys];
+type hashResourceTypes = (typeof HASHED_PREFIX)[prefixKeys];
 
 export enum fileType {
   json,
@@ -25,28 +25,27 @@ export enum fileType {
 export default class Asset {
   public data: Buffer | string;
   public isEncrypted: boolean;
-  public hash: string | null;
+  private hash: string | null;
   public ext: fileType;
   public url: string;
-  constructor(public name: string) {
-    this.name = name;
-    this.ext = fileType[name.split('.').pop()! as keyof typeof fileType];
+  constructor(public path: string) {
+    this.ext = fileType[path.split('.').pop()! as keyof typeof fileType];
     this.isEncrypted = this.ext === fileType.json || this.ext === fileType.atlas;
     this.data = Buffer.alloc(0);
     this.hash = null;
     this.url = '';
   }
   getHash(callback: (arg: string) => string | null) {
-    this.hash = callback(this.name);
+    this.hash = callback(this.path);
   }
   getUrl() {
     this.url =
-      hashFileName(this.name, this.hash) +
+      hashFileName(this.path, this.hash) +
       (this.ext === fileType.mp4 || this.ext === fileType.m4a ? '.' + fileType[this.ext] : '');
     return this.url;
   }
   async fetchFile() {
-    console.log(`downloading ${this.name}`);
+    console.log(`downloading ${this.path}`);
     this.data = Buffer.from(await fetchFile(this.url));
   }
   async decodeFile() {

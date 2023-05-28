@@ -30,5 +30,8 @@ for (const key in newData) {
   }
 }
 for (const key in oldData) {
-  appendFileSync(path.resolve(SAVE_PATH, `v${version}/`, 'del.csv'), `"${key}",${oldData[key]}`);
+  appendFileSync(
+    path.resolve(SAVE_PATH, `diff_v${version}/`, 'del.csv'),
+    `"${key}",${oldData[key]}\n`
+  );
 }
