@@ -1,8 +1,8 @@
 {
   "name": "@nulla/prism-core",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "",
-  "main": "dist/export.js",
+  "main": "src/export.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w"
