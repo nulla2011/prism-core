@@ -46,7 +46,11 @@ export default class Asset {
   }
   async fetchFile() {
     console.log(`downloading ${this.path}`);
-    this.data = Buffer.from(await fetchFile(this.url));
+    this.data = Buffer.from(
+      await fetchFile(this.url).catch((e) => {
+        throw e;
+      })
+    );
   }
   async decodeFile() {
     if (this.isEncrypted) {

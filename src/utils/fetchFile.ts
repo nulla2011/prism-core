@@ -1,16 +1,16 @@
 import Axios, { AxiosResponse } from 'axios';
 import { PRINT_HASH } from '../settings';
-import { URL_PREFIX } from '../constants/url';
+import { DOMAIN, URL_PREFIX } from '../constants/url';
 
-export default async function fetchFile(name: string) {
+export default async function fetchFile(path: string) {
   if (PRINT_HASH) {
-    console.log(name);
+    console.log(path);
   }
   let response: AxiosResponse;
   let service = Axios.create({
     baseURL: URL_PREFIX,
     headers: {
-      referer: 'https://shinycolors.enza.fun',
+      referer: `https://${DOMAIN}`,
       'User-Agent':
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
     },
@@ -24,7 +24,7 @@ export default async function fetchFile(name: string) {
     }
     return response;
   });
-  response = await service.get(name).catch((error) => {
+  response = await service.get(path).catch((error) => {
     throw new Error(`${error}`);
   });
   if (response.status >= 300) {
