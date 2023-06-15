@@ -1,4 +1,4 @@
-import fetchFile from '../utils/fetchFile';
+import fetchFile from './fetchFile';
 import decryptFile from './decryptFile';
 import hashFileName from './hashFileName';
 import unGzip from '../lib/gzip';
